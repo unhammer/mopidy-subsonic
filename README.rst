@@ -42,6 +42,17 @@ following to your Mopidy configuration::
 
 Searches in Mopidy will now return results from your Subsonic library.
 
+If you have no context, use `/`.
+
+If you want to use hostname that redirects to your dynamic IP, you should use the port/ssl-setting of the initial hostname. So if your site uses port 8443 and SSL, but you want to use the redirect from your subsonic.org subdomain, you would do something like::
+
+    [subsonic]
+    hostname = SUBDOMAIN.subsonic.org
+    port = 80
+    ssl = no
+    context = /
+    username = USER
+    password = PASS
 
 Project resources
 =================
