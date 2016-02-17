@@ -109,7 +109,7 @@ class SubsonicRemoteClient(object):
             self.api_port = port
             self.api_user = username
             self.api_pass = password
-            if ssl: 
+            if ssl:
                 self.api_hostname = "https://" + hostname
             else:
                 self.api_hostname = "http://" + hostname
@@ -214,7 +214,7 @@ class SubsonicRemoteClient(object):
 
     @cache(ctl=16)
     def get_track(self, data):
-        track = self._convert_data(data) 
+        track = self._convert_data(data)
         return track
 
     def _convert_data(self, data):
@@ -250,9 +250,9 @@ class SubsonicRemoteClient(object):
             track_kwargs['name'] = data['title']
 
         if 'year' in data:
-            track_kwargs['date'] = data['year']
+            track_kwargs['date'] = str(data['year'])
         else:
-            track_kwargs['date'] = 'none'
+            track_kwargs['date'] = None
 
         if artist_kwargs:
             artist = Artist(**artist_kwargs)
@@ -349,9 +349,9 @@ class SubsonicRemoteClient(object):
     # MPD doesn't like /, \n, or \r in names
     # should only necessary until next release of mopidy
     def fix_playlist_name(self, name):
-        _invalid_playlist_chars = re.compile(r'[\n\r/]') 
+        _invalid_playlist_chars = re.compile(r'[\n\r/]')
         fixed_name = _invalid_playlist_chars.sub('-', name)
-        return fixed_name 
+        return fixed_name
 
     def get_user_playlists(self):
         results = self.api.getPlaylists().get('playlists')
